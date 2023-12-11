@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const patientSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -17,18 +17,23 @@ const patientSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  role: {
+    type: String,
+    enum: ["admin", "patient"],
+    default: "patient",
+  },
 });
 
-patientSchema.methods.encryptPassword = async (password) => {
+userSchema.methods.encryptPassword = async (password) => {
   const hashedPassword = await bcrypt.hash(password, 10);
   return hashedPassword;
 };
 
-patientSchema.methods.comparePassword = async function (password) {
+userSchema.methods.comparePassword = async function (password) {
   const isPasswordValid = await bcrypt.compare(password, this.password);
   return isPasswordValid;
 };
 
-const Patient = mongoose.model("Patient", patientSchema);
+const User = mongoose.model("User", userSchema);
 
-module.exports = Patient;
+module.exports = User;
