@@ -6,7 +6,7 @@ function checkPatientRole(req, res, next) {
   } else {
     res
       .status(403)
-      .json({ message: "Acceso denegado. No tienes los permisos necesarios." });
+      .json({ message: "Unauthorized, only patient can do this changes" });
   }
 }
 

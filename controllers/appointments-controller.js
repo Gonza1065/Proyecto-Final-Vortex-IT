@@ -14,7 +14,7 @@ const addAppointment = async (req, res, next) => {
     const newAppointment = new Appointment({
       doctor,
       date,
-      status,
+      status: status || "available"
     });
     await newAppointment.save();
     await Doctor.findByIdAndUpdate(doctor, {

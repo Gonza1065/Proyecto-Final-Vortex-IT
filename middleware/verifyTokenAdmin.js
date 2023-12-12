@@ -4,9 +4,9 @@ function checkAdminRole(req, res, next) {
   if (userRole === "admin") {
     next();
   } else {
-    res
+    return res
       .status(403)
-      .json({ message: "Acceso denegado. No tienes los permisos necesarios." });
+      .json({ message: "Unauthorized, only admin can do this changes" });
   }
 }
 

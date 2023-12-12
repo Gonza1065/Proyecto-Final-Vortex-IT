@@ -14,7 +14,31 @@ const getDoctors = async (req, res, next) => {
     console.log(err);
   }
 };
-const getDoctorSeeDetails = (req, res, next) => {};
+const getDoctorSeeDetails = async (req, res, next) => {
+  const doctorId = req.params.id;
+  try {
+    const existingDoctor = await Doctor.findById(doctorId).populate(
+      "appointments"
+    );
+    if (!existingDoctor) {
+      return res
+        .status(404)
+        .json({ message: "Doctor not found for see details" });
+    }
+    const appointmentsAvailable = existingDoctor.appointments.filter(
+      (appointment) => appointment.status === "available"
+    );
+    if (appointmentsAvailable.length === 0) {
+      return res.status(404).json({
+        message: "There aren't appointments available, full reserved",
+      });
+    }
+    return res.status(200).json(appointmentsAvailable);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ message: "Error internal for see details" });
+  }
+};
 const addDoctor = async (req, res, next) => {
   const { name, lastName, specialty, appointments } = req.body;
 
@@ -43,7 +67,22 @@ const addDoctor = async (req, res, next) => {
     console.log(err);
   }
 };
-const updateDoctor = (req, res, next) => {};
+const updateDoctor = async (req, res, next) => {
+  const doctorId = req.params.id;
+  const updateData = req.body;
+  try {
+    const existingDoctor = await Doctor.findById(doctorId);
+    if (!existingDoctor) {
+      return res
+        .status(404)
+        .json({ message: "Doctor not found for update it" });
+    }
+    await Doctor.findByIdAndUpdate(doctorId, updateData);
+    return res.status(201).json({ message: "Doctor updated" });
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 exports.getDoctors = getDoctors;
 exports.getDoctorSeeDetails = getDoctorSeeDetails;

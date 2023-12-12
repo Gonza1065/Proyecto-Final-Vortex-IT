@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const appointmentsController = require("../controllers/appointments-controller");
+
 const authenticateToken = require("../middleware/authenticateToken");
 const verifyTokenAdmin = require("../middleware/verifyTokenAdmin");
 const verifyTokenPatient = require("../middleware/verifyTokenPatient");
