@@ -1,0 +1,243 @@
+{
+  "info": {
+    "_postman_id": "16c1cc9b-2766-4e6b-a11d-0d8b93571dc9",
+    "name": "Final-Vortex-IT",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "30368572"
+  },
+  "item": [
+    {
+      "name": "Register Users",
+      "item": [
+        {
+          "name": "Login Admin",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"saguasg@gmail.com\",\r\n    \"password\": \"gonza2002\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/users/login",
+              "host": ["{{url}}"],
+              "path": ["users", "login"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login Patient",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"fers@gmail.com\",\r\n    \"password\": \"fer2002\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/users/login",
+              "host": ["{{url}}"],
+              "path": ["users", "login"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Doctors",
+      "item": [
+        {
+          "name": "GET Doctors",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-access-token",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Nzc3NDVkNzZkM2E4MWZlNTQ4YzEyMyIsInJvbGUiOiJwYXRpZW50IiwiaWF0IjoxNzAyMzg4NzU4LCJleHAiOjE3MDI0NzUxNTh9.-tSwKEQUbP75SuG105QL1f_WGa8lgAccRI9KDgdl3Qs",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/doctors/",
+              "host": ["{{url}}"],
+              "path": ["doctors", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET See Details By Doctor",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-access-token",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Nzc3NDVkNzZkM2E4MWZlNTQ4YzEyMyIsInJvbGUiOiJwYXRpZW50IiwiaWF0IjoxNzAyMzg4NzU4LCJleHAiOjE3MDI0NzUxNTh9.-tSwKEQUbP75SuG105QL1f_WGa8lgAccRI9KDgdl3Qs",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/doctors/65785d44bef7a70c98e0bed7",
+              "host": ["{{url}}"],
+              "path": ["doctors", "65785d44bef7a70c98e0bed7"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST Add Doctor",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "x-access-token",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Nzc2Zjc0NzFhOWI2YTExMjEyNmFhNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMjM4MzAxOSwiZXhwIjoxNzAyNDY5NDE5fQ.DDoQZapDtb5Tl7ZsRazwd-hPN2XcGbs9p4B-KorD1BE",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Silvia\",\r\n    \"lastName\": \"Luna\",\r\n    \"specialty\": \"Cirujia plastica\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/doctors/add-doctor",
+              "host": ["{{url}}"],
+              "path": ["doctors", "add-doctor"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH Update Doctor",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "x-access-token",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Nzc2Zjc0NzFhOWI2YTExMjEyNmFhNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMjM5MjU3NSwiZXhwIjoxNzAyNDc4OTc1fQ.Vgp37tXhzbg8gFwqmSeJzEf4e3KXx9b9SIEnBpkkjjg",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Roxana\",\r\n    \"specialty\": \"Odontologia\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/doctors/update-doctor/65785a63e96a8d8e50bfbfbb",
+              "host": ["{{url}}"],
+              "path": ["doctors", "update-doctor", "65785a63e96a8d8e50bfbfbb"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Appointments",
+      "item": [
+        {
+          "name": "POST Add Appointment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "x-access-token",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Nzc2Zjc0NzFhOWI2YTExMjEyNmFhNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMjM4MzAxOSwiZXhwIjoxNzAyNDY5NDE5fQ.DDoQZapDtb5Tl7ZsRazwd-hPN2XcGbs9p4B-KorD1BE",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"doctor\": \"65785d44bef7a70c98e0bed7\",\r\n    \"date\": \"14:00 PM\",\r\n    \"status\": \"available\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/appointment/add-appointment",
+              "host": ["{{url}}"],
+              "path": ["appointment", "add-appointment"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST Reserve Appointment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "x-access-token",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Nzc3NDVkNzZkM2E4MWZlNTQ4YzEyMyIsInJvbGUiOiJwYXRpZW50IiwiaWF0IjoxNzAyMzg4NzU4LCJleHAiOjE3MDI0NzUxNTh9.-tSwKEQUbP75SuG105QL1f_WGa8lgAccRI9KDgdl3Qs",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"userId\": \"6577745d76d3a81fe548c123\",\r\n    \"appointmentId\": \"65785d01bef7a70c98e0bed4\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/appointment/reserve-appointment",
+              "host": ["{{url}}"],
+              "path": ["appointment", "reserve-appointment"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Specialities",
+      "item": [
+        {
+          "name": "GET Specialities",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-access-token",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Nzc3NDVkNzZkM2E4MWZlNTQ4YzEyMyIsInJvbGUiOiJwYXRpZW50IiwiaWF0IjoxNzAyMzkyNjQwLCJleHAiOjE3MDI0NzkwNDB9.sap4SkFSy4R4wlq_hYZbFuJtUzMzc0cS_U5AUbqxhj4",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/specialty/",
+              "host": ["{{url}}"],
+              "path": ["specialty", ""]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
