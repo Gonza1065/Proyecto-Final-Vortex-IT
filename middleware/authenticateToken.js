@@ -3,19 +3,14 @@ const config = require("../config/config");
 
 function authenticateToken(req, res, next) {
   const token = req.headers["x-access-token"];
-
   if (!token) {
-    return res
-      .status(401)
-      .json({ message: "Acceso no autorizado. Token no proporcionado." });
+    return res.status(401).json({ message: "Unauthorized, token no provided" });
   }
-
   jwt.verify(token, config.secret, (err, user) => {
     if (err) {
-      return res.status(403).json({ message: "Token no válido." });
+      return res.status(403).json({ message: "Token no valid." });
     }
-
-    req.user = user; // Almacena la información del usuario en req.user
+    req.user = user;
     next();
   });
 }

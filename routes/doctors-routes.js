@@ -2,14 +2,23 @@ const express = require("express");
 const router = express.Router();
 
 const doctorsController = require("../controllers/doctors-controller");
-const checkAdminRole = require("../middleware/verifyTokenAdmin");
+const verifyTokenAdmin = require("../middleware/verifyTokenAdmin");
+const verifyTokenPatient = require("../middleware/verifyTokenPatient");
 const authenticateToken = require("../middleware/authenticateToken");
 
 router.use(authenticateToken);
 
-router.get("/doctors", doctorsController.getDoctors);
-router.get("/doctor/:id", doctorsController.getDoctorSeeDetails);
-router.post("/add-doctor", checkAdminRole, doctorsController.addDoctor);
-router.patch("/update-doctor", doctorsController.updateDoctor);
+router.get("/", verifyTokenPatient, doctorsController.getDoctors);
+router.get(
+  "/doctor/:id",
+  verifyTokenPatient,
+  doctorsController.getDoctorSeeDetails
+);
+router.post("/add-doctor", verifyTokenAdmin, doctorsController.addDoctor);
+router.patch(
+  "/update-doctor",
+  verifyTokenAdmin,
+  doctorsController.updateDoctor
+);
 
 module.exports = router;
