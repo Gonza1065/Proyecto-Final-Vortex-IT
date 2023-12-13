@@ -1,9 +1,16 @@
 const Doctor = require("../models/Doctor");
 const Appointment = require("../models/Appointment");
+
 const getDoctors = async (req, res, next) => {
   try {
-    const existingDoctors = await Doctor.find().populate("appointments");
-    if (existingDoctors.length <= 0) {
+    const existingDoctors = await Doctor.find().populate({
+      path: "appointments",
+      populate: {
+        path: "patient",
+        model: "User",
+      },
+    });
+    if (existingDoctors.length === 0) {
       return res
         .status(409)
         .json({ message: "There aren't doctors in the system" });
@@ -14,6 +21,7 @@ const getDoctors = async (req, res, next) => {
     console.log(err);
   }
 };
+
 const getDoctorSeeDetails = async (req, res, next) => {
   const doctorId = req.params.id;
   try {
@@ -39,9 +47,9 @@ const getDoctorSeeDetails = async (req, res, next) => {
     return res.status(500).json({ message: "Error internal for see details" });
   }
 };
+
 const addDoctor = async (req, res, next) => {
   const { name, lastName, specialty, appointments } = req.body;
-
   try {
     const newDoctor = new Doctor({
       name,
@@ -61,12 +69,12 @@ const addDoctor = async (req, res, next) => {
       );
       await newDoctor.save();
     }
-
     return res.status(201).json({ message: "Doctor created" });
   } catch (err) {
     console.log(err);
   }
 };
+
 const updateDoctor = async (req, res, next) => {
   const doctorId = req.params.id;
   const updateData = req.body;
