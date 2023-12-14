@@ -38,7 +38,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"email\": \"fers@gmail.com\",\r\n    \"password\": \"fer2002\"\r\n}",
+              "raw": "{\r\n    \"email\": \"sebas@gmail.com\",\r\n    \"password\": \"seba2002\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -60,7 +60,29 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"name\": \"Mercedes\",\r\n    \"lastName\": \"Saguas\",\r\n    \"email\": \"merces@gmail.com\",\r\n    \"password\": \"merce2002\"\r\n}",
+              "raw": "{\r\n    \"name\": \"Sebastian\",\r\n    \"lastName\": \"Saguas\",\r\n    \"email\": \"sebas@gmail.com\",\r\n    \"password\": \"seba2002\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/users/signup",
+              "host": ["{{url}}"],
+              "path": ["users", "signup"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Signup Admin",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Gonzalo\",\r\n    \"lastName\": \"Saguas\",\r\n    \"email\": \"saguasg@gmail.com\",\r\n    \"password\": \"gonza2002\",\r\n    \"role\": \"admin\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -87,7 +109,7 @@
             "header": [
               {
                 "key": "x-access-token",
-                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Nzc3NDVkNzZkM2E4MWZlNTQ4YzEyMyIsInJvbGUiOiJwYXRpZW50IiwiaWF0IjoxNzAyMzg4NzU4LCJleHAiOjE3MDI0NzUxNTh9.-tSwKEQUbP75SuG105QL1f_WGa8lgAccRI9KDgdl3Qs",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNTAwNjUxMTM2MjUwYTU3NDAzMCIsInJvbGUiOiJwYXRpZW50IiwiaWF0IjoxNzAyNTY1MTQ3LCJleHAiOjE3MDI2NTE1NDd9.pMWG0rcEO_skn1ZZrok1LzXie8O2nODo5FsEbiLuQpo",
                 "type": "text"
               }
             ],
@@ -106,14 +128,14 @@
             "header": [
               {
                 "key": "x-access-token",
-                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Nzc3NDVkNzZkM2E4MWZlNTQ4YzEyMyIsInJvbGUiOiJwYXRpZW50IiwiaWF0IjoxNzAyMzg4NzU4LCJleHAiOjE3MDI0NzUxNTh9.-tSwKEQUbP75SuG105QL1f_WGa8lgAccRI9KDgdl3Qs",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNTAwNjUxMTM2MjUwYTU3NDAzMCIsInJvbGUiOiJwYXRpZW50IiwiaWF0IjoxNzAyNTY1MTQ3LCJleHAiOjE3MDI2NTE1NDd9.pMWG0rcEO_skn1ZZrok1LzXie8O2nODo5FsEbiLuQpo",
                 "type": "text"
               }
             ],
             "url": {
-              "raw": "{{url}}/doctors/6579abc895d9223c4af01115",
+              "raw": "{{url}}/doctors/657b1566651136250a574039",
               "host": ["{{url}}"],
-              "path": ["doctors", "6579abc895d9223c4af01115"]
+              "path": ["doctors", "657b1566651136250a574039"]
             }
           },
           "response": []
@@ -125,13 +147,13 @@
             "header": [
               {
                 "key": "x-access-token",
-                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Nzc2Zjc0NzFhOWI2YTExMjEyNmFhNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMjQ3MTY0MSwiZXhwIjoxNzAyNTU4MDQxfQ.KG_JiO012x-GyMkrKvqntIjQyqopU5neQw8DTfeoTgQ",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNGY5NjUxMTM2MjUwYTU3NDAyZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMjU2NTEzMiwiZXhwIjoxNzAyNjUxNTMyfQ.kuuqXRZd0P00q46VjoqapiY0blnSadWbqBpT62eV6gY",
                 "type": "text"
               }
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"name\": \"Alejandra\",\r\n    \"lastName\": \"Fernandez\",\r\n    \"specialty\": \"Enfermeria\"\r\n}",
+              "raw": "{\r\n    \"name\": \"Celina\",\r\n    \"lastName\": \"Alvarez\",\r\n    \"specialty\": \"Cirujia\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -153,7 +175,7 @@
             "header": [
               {
                 "key": "x-access-token",
-                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Nzc2Zjc0NzFhOWI2YTExMjEyNmFhNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMjM5MjU3NSwiZXhwIjoxNzAyNDc4OTc1fQ.Vgp37tXhzbg8gFwqmSeJzEf4e3KXx9b9SIEnBpkkjjg",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNGY5NjUxMTM2MjUwYTU3NDAyZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMjU2NTEzMiwiZXhwIjoxNzAyNjUxNTMyfQ.kuuqXRZd0P00q46VjoqapiY0blnSadWbqBpT62eV6gY",
                 "type": "text"
               }
             ],
@@ -167,9 +189,9 @@
               }
             },
             "url": {
-              "raw": "{{url}}/doctors/update-doctor/65785a63e96a8d8e50bfbfbb",
+              "raw": "{{url}}/doctors/update-doctor/657b1566651136250a574039",
               "host": ["{{url}}"],
-              "path": ["doctors", "update-doctor", "65785a63e96a8d8e50bfbfbb"]
+              "path": ["doctors", "update-doctor", "657b1566651136250a574039"]
             }
           },
           "response": []
@@ -186,13 +208,13 @@
             "header": [
               {
                 "key": "x-access-token",
-                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Nzc2Zjc0NzFhOWI2YTExMjEyNmFhNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMjQ3MDM0NSwiZXhwIjoxNzAyNTU2NzQ1fQ.gFUCRydpoTxJJA-IEzYXtiUyZaSQuFBO9YoKH2UY-No",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNGY5NjUxMTM2MjUwYTU3NDAyZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMjU2NTEzMiwiZXhwIjoxNzAyNjUxNTMyfQ.kuuqXRZd0P00q46VjoqapiY0blnSadWbqBpT62eV6gY",
                 "type": "text"
               }
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"doctor\": \"6579ad32e874943ef57d47e9\",\r\n    \"date\": \"15:00 PM\"\r\n}",
+              "raw": "{\r\n    \"doctor\": \"657b1566651136250a574039\",\r\n    \"date\": \"17:00 PM\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -214,13 +236,13 @@
             "header": [
               {
                 "key": "x-access-token",
-                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Nzc3NDVkNzZkM2E4MWZlNTQ4YzEyMyIsInJvbGUiOiJwYXRpZW50IiwiaWF0IjoxNzAyMzg4NzU4LCJleHAiOjE3MDI0NzUxNTh9.-tSwKEQUbP75SuG105QL1f_WGa8lgAccRI9KDgdl3Qs",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNTAwNjUxMTM2MjUwYTU3NDAzMCIsInJvbGUiOiJwYXRpZW50IiwiaWF0IjoxNzAyNTY1MTQ3LCJleHAiOjE3MDI2NTE1NDd9.pMWG0rcEO_skn1ZZrok1LzXie8O2nODo5FsEbiLuQpo",
                 "type": "text"
               }
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"userId\": \"6579b265d48849c1998bac47\",\r\n    \"appointmentId\": \"6579b2df949faa587eaa5c50\"\r\n}",
+              "raw": "{\r\n    \"userId\": \"657b1500651136250a574030\",\r\n    \"appointmentId\": \"657b163e3aea4d5ac106027f\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -236,23 +258,51 @@
           "response": []
         },
         {
+          "name": "POST Cancel Appointment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "x-access-token",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNTAwNjUxMTM2MjUwYTU3NDAzMCIsInJvbGUiOiJwYXRpZW50IiwiaWF0IjoxNzAyNTY1MTQ3LCJleHAiOjE3MDI2NTE1NDd9.pMWG0rcEO_skn1ZZrok1LzXie8O2nODo5FsEbiLuQpo",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"userId\": \"657b1500651136250a574030\",\r\n    \"appointmentId\": \"657b15e1651136250a57403e\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/appointment/cancel-appointment",
+              "host": ["{{url}}"],
+              "path": ["appointment", "cancel-appointment"]
+            }
+          },
+          "response": []
+        },
+        {
           "name": "DELETE Delete Appointment",
           "request": {
             "method": "DELETE",
             "header": [
               {
                 "key": "x-access-token",
-                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Nzc2Zjc0NzFhOWI2YTExMjEyNmFhNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMjQ3MTY0MSwiZXhwIjoxNzAyNTU4MDQxfQ.KG_JiO012x-GyMkrKvqntIjQyqopU5neQw8DTfeoTgQ",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IwMjFiMDYyMjVmYTA2ODgxMWEzYSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMjU2MDQ4MiwiZXhwIjoxNzAyNjQ2ODgyfQ.kptRXkjX-Oup8qJa94k1rO3ZDm9jUwaySHz__LS6RTA",
                 "type": "text"
               }
             ],
             "url": {
-              "raw": "{{url}}/appointment/delete-appointment/6579abd795d9223c4af01118",
+              "raw": "{{url}}/appointment/delete-appointment/657b077b6d2bf6d3f5e40de5",
               "host": ["{{url}}"],
               "path": [
                 "appointment",
                 "delete-appointment",
-                "6579abd795d9223c4af01118"
+                "657b077b6d2bf6d3f5e40de5"
               ]
             }
           },
@@ -265,40 +315,63 @@
             "header": [
               {
                 "key": "x-access-token",
-                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Nzc2Zjc0NzFhOWI2YTExMjEyNmFhNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMjQ3MTY0MSwiZXhwIjoxNzAyNTU4MDQxfQ.KG_JiO012x-GyMkrKvqntIjQyqopU5neQw8DTfeoTgQ",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNGY5NjUxMTM2MjUwYTU3NDAyZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMjU2NTEzMiwiZXhwIjoxNzAyNjUxNTMyfQ.kuuqXRZd0P00q46VjoqapiY0blnSadWbqBpT62eV6gY",
                 "type": "text"
               }
             ],
             "url": {
-              "raw": "{{url}}/appointment/get-appointments-by-doctor/6579ad32e874943ef57d47e9",
+              "raw": "{{url}}/appointment/get-appointments-by-doctor/657b1566651136250a574039",
               "host": ["{{url}}"],
               "path": [
                 "appointment",
                 "get-appointments-by-doctor",
-                "6579ad32e874943ef57d47e9"
+                "657b1566651136250a574039"
               ]
             }
           },
           "response": []
         },
         {
-          "name": "GET See appointments By Patient",
+          "name": "GET See Appointments By Patient",
           "request": {
             "method": "GET",
             "header": [
               {
                 "key": "x-access-token",
-                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Nzc2Zjc0NzFhOWI2YTExMjEyNmFhNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMjQ3MTY0MSwiZXhwIjoxNzAyNTU4MDQxfQ.KG_JiO012x-GyMkrKvqntIjQyqopU5neQw8DTfeoTgQ",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNGY5NjUxMTM2MjUwYTU3NDAyZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMjU2NTEzMiwiZXhwIjoxNzAyNjUxNTMyfQ.kuuqXRZd0P00q46VjoqapiY0blnSadWbqBpT62eV6gY",
                 "type": "text"
               }
             ],
             "url": {
-              "raw": "{{url}}/appointment/get-appointments-by-patients/6579b265d48849c1998bac47",
+              "raw": "{{url}}/appointment/get-appointments-by-patients/657b1500651136250a574030",
               "host": ["{{url}}"],
               "path": [
                 "appointment",
                 "get-appointments-by-patients",
-                "6579b265d48849c1998bac47"
+                "657b1500651136250a574030"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET All Cancelations By Patient",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-access-token",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IwMjFiMDYyMjVmYTA2ODgxMWEzYSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMjU2MDQ4MiwiZXhwIjoxNzAyNjQ2ODgyfQ.kptRXkjX-Oup8qJa94k1rO3ZDm9jUwaySHz__LS6RTA",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/appointment/all-cancelations-by-patient/657b1500651136250a574030",
+              "host": ["{{url}}"],
+              "path": [
+                "appointment",
+                "all-cancelations-by-patient",
+                "657b1500651136250a574030"
               ]
             }
           },
@@ -316,7 +389,7 @@
             "header": [
               {
                 "key": "x-access-token",
-                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Nzc3NDVkNzZkM2E4MWZlNTQ4YzEyMyIsInJvbGUiOiJwYXRpZW50IiwiaWF0IjoxNzAyMzkyNjQwLCJleHAiOjE3MDI0NzkwNDB9.sap4SkFSy4R4wlq_hYZbFuJtUzMzc0cS_U5AUbqxhj4",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IwMjgzMDYyMjVmYTA2ODgxMWEzZSIsInJvbGUiOiJwYXRpZW50IiwiaWF0IjoxNzAyNTYwNTk0LCJleHAiOjE3MDI2NDY5OTR9.EF_BD6sS5syxHM5H-ZSpylDG0kfxLMvOSF8XRJTuOzw",
                 "type": "text"
               }
             ],

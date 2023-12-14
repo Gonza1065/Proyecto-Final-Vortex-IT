@@ -1,8 +1,8 @@
 const User = require("../models/User");
 const generateToken = require("../token/generateToken");
+
 const signup = async (req, res, next) => {
   const { name, lastName, email, password, role } = req.body;
-
   try {
     const existingUser = await User.findOne({ email: email });
     if (existingUser) {
@@ -23,9 +23,9 @@ const signup = async (req, res, next) => {
     return res.status(500).json({ message: "Error at create the user" });
   }
 };
+
 const login = async (req, res, next) => {
   const { email, password } = req.body;
-
   try {
     const existingUser = await User.findOne({ email: email });
     if (!existingUser) {

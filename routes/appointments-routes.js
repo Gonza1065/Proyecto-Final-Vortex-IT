@@ -45,14 +45,14 @@ router.post(
   appointmentsController.reserveAppointment
 );
 
-router.delete(
-  "/cancel-appointment/:id",
+router.post(
+  "/cancel-appointment",
   verifyTokenPatient,
   appointmentsController.cancelAppointment
 );
 
 router.get(
-  "/all-cancelations-by-patient",
+  "/all-cancelations-by-patient/:id",
   verifyTokenAdmin,
   appointmentsController.allCancelationsByPatient
 );

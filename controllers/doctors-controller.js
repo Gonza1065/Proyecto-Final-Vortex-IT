@@ -3,13 +3,7 @@ const Appointment = require("../models/Appointment");
 
 const getDoctors = async (req, res, next) => {
   try {
-    const existingDoctors = await Doctor.find().populate({
-      path: "appointments",
-      populate: {
-        path: "patient",
-        model: "User",
-      },
-    });
+    const existingDoctors = await Doctor.find().populate();
     if (existingDoctors.length === 0) {
       return res
         .status(409)
@@ -32,6 +26,11 @@ const getDoctorSeeDetails = async (req, res, next) => {
       return res
         .status(404)
         .json({ message: "Doctor not found for see details" });
+    }
+    if (existingDoctor.appointments.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "There aren't appointments published" });
     }
     const appointmentsAvailable = existingDoctor.appointments.filter(
       (appointment) => appointment.status === "available"

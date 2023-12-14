@@ -22,12 +22,6 @@ const userSchema = new mongoose.Schema({
     enum: ["admin", "patient"],
     default: "patient",
   },
-  appointments: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Appointment",
-    },
-  ],
 });
 
 userSchema.methods.encryptPassword = async (password) => {
