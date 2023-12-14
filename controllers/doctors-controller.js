@@ -1,9 +1,10 @@
 const Doctor = require("../models/Doctor");
 const Appointment = require("../models/Appointment");
 
+// http://localhost:5000/api/doctors/
 const getDoctors = async (req, res, next) => {
   try {
-    const existingDoctors = await Doctor.find().populate();
+    const existingDoctors = await Doctor.find().populate("specialty");
     if (existingDoctors.length === 0) {
       return res
         .status(409)
@@ -16,6 +17,7 @@ const getDoctors = async (req, res, next) => {
   }
 };
 
+// http://localhost:5000/api/doctors/:id
 const getDoctorSeeDetails = async (req, res, next) => {
   const doctorId = req.params.id;
   try {
@@ -47,6 +49,7 @@ const getDoctorSeeDetails = async (req, res, next) => {
   }
 };
 
+// http://localhost:5000/api/doctors/add-doctor
 const addDoctor = async (req, res, next) => {
   const { name, lastName, specialty, appointments } = req.body;
   try {
@@ -74,6 +77,7 @@ const addDoctor = async (req, res, next) => {
   }
 };
 
+// http://localhost:5000/api/doctors/update-doctor/:id
 const updateDoctor = async (req, res, next) => {
   const doctorId = req.params.id;
   const updateData = req.body;

@@ -1,6 +1,8 @@
 const User = require("../models/User");
+
 const generateToken = require("../token/generateToken");
 
+// http://localhost:5000/api/users/signup
 const signup = async (req, res, next) => {
   const { name, lastName, email, password, role } = req.body;
   try {
@@ -24,6 +26,7 @@ const signup = async (req, res, next) => {
   }
 };
 
+// http://localhost:5000/api/users/login
 const login = async (req, res, next) => {
   const { email, password } = req.body;
   try {

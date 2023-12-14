@@ -133,9 +133,9 @@
               }
             ],
             "url": {
-              "raw": "{{url}}/doctors/657b1566651136250a574039",
+              "raw": "{{url}}/doctors/657b348815e539acc2ffdb35",
               "host": ["{{url}}"],
-              "path": ["doctors", "657b1566651136250a574039"]
+              "path": ["doctors", "657b348815e539acc2ffdb35"]
             }
           },
           "response": []
@@ -153,7 +153,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"name\": \"Celina\",\r\n    \"lastName\": \"Alvarez\",\r\n    \"specialty\": \"Cirujia\"\r\n}",
+              "raw": "{\r\n    \"name\": \"Celina\",\r\n    \"lastName\": \"Alvarez\",\r\n    \"specialty\": \"657b3417ef01dd00557ba648\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -214,7 +214,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"doctor\": \"657b1566651136250a574039\",\r\n    \"date\": \"17:00 PM\"\r\n}",
+              "raw": "{\r\n    \"doctor\": \"657b348815e539acc2ffdb35\",\r\n    \"date\": \"22:00 PM\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -242,7 +242,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"userId\": \"657b1500651136250a574030\",\r\n    \"appointmentId\": \"657b163e3aea4d5ac106027f\"\r\n}",
+              "raw": "{\r\n    \"userId\": \"657b1500651136250a574030\",\r\n    \"appointmentId\": \"657b34f4bb687f0311ceefa6\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -320,12 +320,12 @@
               }
             ],
             "url": {
-              "raw": "{{url}}/appointment/get-appointments-by-doctor/657b1566651136250a574039",
+              "raw": "{{url}}/appointment/get-appointments-by-doctor/657b348815e539acc2ffdb35",
               "host": ["{{url}}"],
               "path": [
                 "appointment",
                 "get-appointments-by-doctor",
-                "657b1566651136250a574039"
+                "657b348815e539acc2ffdb35"
               ]
             }
           },
@@ -397,6 +397,34 @@
               "raw": "{{url}}/specialty/",
               "host": ["{{url}}"],
               "path": ["specialty", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST Add Specialty",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "x-access-token",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNGY5NjUxMTM2MjUwYTU3NDAyZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMjU3Mjk2MSwiZXhwIjoxNzAyNjU5MzYxfQ.CytthVB8WA6dyjXed1Cyo7Bd89oUs2gwfm6DasVXf9s",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"specialty\": \"Cirujia\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/specialty/add-specialty",
+              "host": ["{{url}}"],
+              "path": ["specialty", "add-specialty"]
             }
           },
           "response": []

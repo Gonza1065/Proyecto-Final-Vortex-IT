@@ -10,8 +10,8 @@ const doctorSchema = new mongoose.Schema({
     required: true,
   },
   specialty: {
-    type: String,
-    required: true,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Specialty",
   },
   appointments: [
     {
