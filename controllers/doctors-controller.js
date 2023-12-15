@@ -4,7 +4,9 @@ const Appointment = require("../models/Appointment");
 // http://localhost:5000/api/doctors/
 const getDoctors = async (req, res, next) => {
   try {
-    const existingDoctors = await Doctor.find().populate("specialty");
+    const existingDoctors = await Doctor.find()
+      .populate("specialty")
+      .select("name lastName specialty");
     if (existingDoctors.length === 0) {
       return res
         .status(409)
@@ -21,9 +23,13 @@ const getDoctors = async (req, res, next) => {
 const getDoctorSeeDetails = async (req, res, next) => {
   const doctorId = req.params.id;
   try {
-    const existingDoctor = await Doctor.findById(doctorId).populate(
-      "appointments"
-    );
+    const existingDoctor = await Doctor.findById(doctorId).populate({
+      path: "appointments",
+      populate: {
+        path: "doctor",
+        select: "name lastName specialty",
+      },
+    });
     if (!existingDoctor) {
       return res
         .status(404)

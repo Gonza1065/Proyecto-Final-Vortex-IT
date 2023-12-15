@@ -4,7 +4,9 @@ const config = require("../config/config");
 function authenticateToken(req, res, next) {
   const token = req.headers["x-access-token"];
   if (!token) {
-    return res.status(401).json({ message: "Unauthorized, token no provided" });
+    return res
+      .status(401)
+      .json({ message: "Unauthorized, please you have to login" });
   }
   jwt.verify(token, config.secret, (err, user) => {
     if (err) {
