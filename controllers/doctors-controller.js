@@ -1,12 +1,17 @@
 const Doctor = require("../models/Doctor");
 const Appointment = require("../models/Appointment");
+const Specialty = require("../models/Specialty");
 
 // http://localhost:5000/api/doctors/
 const getDoctors = async (req, res, next) => {
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 10;
   try {
     const existingDoctors = await Doctor.find()
       .populate("specialty")
-      .select("name lastName specialty");
+      .select("name lastName specialty")
+      .skip((page - 1) * limit)
+      .limit(limit);
     if (existingDoctors.length === 0) {
       return res
         .status(409)
@@ -16,6 +21,7 @@ const getDoctors = async (req, res, next) => {
     return res.status(200).json(existingDoctors);
   } catch (err) {
     console.log(err);
+    return res.status(500).json({ message: "Error server get doctors" });
   }
 };
 
@@ -26,7 +32,7 @@ const getDoctorSeeDetails = async (req, res, next) => {
     const existingDoctor = await Doctor.findById(doctorId).populate({
       path: "appointments",
       populate: {
-        path: "doctor",
+        path: "doctorId",
         select: "name lastName specialty",
       },
     });
@@ -50,8 +56,9 @@ const getDoctorSeeDetails = async (req, res, next) => {
     }
     return res.status(200).json(appointmentsAvailable);
   } catch (err) {
-    console.log(err);
-    return res.status(500).json({ message: "Error internal for see details" });
+    return res
+      .status(500)
+      .json({ message: "Error internal for see details of the doctor" });
   }
 };
 
@@ -59,6 +66,10 @@ const getDoctorSeeDetails = async (req, res, next) => {
 const addDoctor = async (req, res, next) => {
   const { name, lastName, specialty, appointments } = req.body;
   try {
+    const existingSpecialty = await Specialty.findById(specialty);
+    if (!existingSpecialty) {
+      return res.status(404).json({ message: "Specialty not found" });
+    }
     const newDoctor = new Doctor({
       name,
       lastName,
@@ -79,7 +90,9 @@ const addDoctor = async (req, res, next) => {
     }
     return res.status(201).json({ message: "Doctor created" });
   } catch (err) {
-    console.log(err);
+    return res
+      .status(500)
+      .json({ message: "Error server add doctor at system" });
   }
 };
 
@@ -94,10 +107,12 @@ const updateDoctor = async (req, res, next) => {
         .status(404)
         .json({ message: "Doctor not found for update it" });
     }
-    await Doctor.findByIdAndUpdate(doctorId, updateData);
-    return res.status(201).json({ message: "Doctor updated" });
+    const updatedDoctor = await Doctor.findByIdAndUpdate(doctorId, updateData, {
+      new: true,
+    });
+    return res.status(201).json(updatedDoctor);
   } catch (err) {
-    console.log(err);
+    return res.status(500).json({ message: "Error server update the doctor" });
   }
 };
 

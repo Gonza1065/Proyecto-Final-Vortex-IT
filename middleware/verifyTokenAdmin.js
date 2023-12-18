@@ -6,7 +6,7 @@ function checkAdminRole(req, res, next) {
   } else {
     return res
       .status(403)
-      .json({ message: "Unauthorized, only admin can do this changes" });
+      .json({ message: "Unauthorized, only admin can access this URL" });
   }
 }
 

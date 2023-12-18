@@ -10,7 +10,7 @@ function authenticateToken(req, res, next) {
   }
   jwt.verify(token, config.secret, (err, user) => {
     if (err) {
-      return res.status(403).json({ message: "Token no valid." });
+      return res.status(403).json({ message: "Token no valid" });
     }
     req.user = user;
     next();

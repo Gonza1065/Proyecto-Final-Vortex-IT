@@ -4,9 +4,9 @@ function checkPatientRole(req, res, next) {
   if (userRole === "patient") {
     next();
   } else {
-    res
+    return res
       .status(403)
-      .json({ message: "Unauthorized, only patient can do this changes" });
+      .json({ message: "Unauthorized, only patient can access this URL" });
   }
 }
 

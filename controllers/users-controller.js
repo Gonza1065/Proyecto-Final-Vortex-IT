@@ -1,6 +1,8 @@
 const nodemailer = require("nodemailer");
+const jwt = require("jsonwebtoken");
 
 const User = require("../models/User");
+const config = require("../config/config");
 
 const generateToken = require("../token/generateToken");
 
@@ -23,7 +25,6 @@ const signup = async (req, res, next) => {
     await newUser.save();
     return res.status(201).json(newUser);
   } catch (err) {
-    console.log(err);
     return res.status(500).json({ message: "Error at create the user" });
   }
 };
@@ -47,25 +48,22 @@ const login = async (req, res, next) => {
     const token = generateToken(existingUser);
     return res.status(200).json({ existingUser, token });
   } catch (err) {
-    console.log(err);
+    return res.status(500).json({ message: "Error server at the logging" });
   }
 };
 
+// http://localhost:5000/api/users/forgot-password
 const forgotPassword = async (req, res, next) => {
   const { email } = req.body;
-
   try {
     const existingUser = await User.findOne({ email: email });
     if (!existingUser) {
       return res.status(404).json({ message: "User not found" });
     }
-
     const resetToken = generateToken(existingUser);
-
     existingUser.resetToken = resetToken;
     existingUser.resetTokenExpiration = Date.now() + 3600000;
     await existingUser.save();
-
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -83,31 +81,33 @@ const forgotPassword = async (req, res, next) => {
     await transporter.sendMail(mailOptions);
     return res.status(200).json({ message: "Reset link sent successfully" });
   } catch (err) {
-    console.log(err);
+    return res.status(500).json({
+      message: "Error server at generate the link for reset password",
+    });
   }
 };
 
+// http://localhost:5000/api/users/reset-password/:token
 const resetPassword = async (req, res, next) => {
   const token = req.params.token;
-  const { newPassword } = req.body;
-
+  const decoded = jwt.verify(token, config.secret);
+  const { newPassword, repeatNewPassword } = req.body;
   try {
     const user = await User.findOne({
-      resetToken: token,
-      resetTokenExpiration: { $gt: Date.now() },
+      _id: decoded.id,
     });
-
     if (!user) {
       return res.status(400).json({ message: "Invalid or expired token" });
     }
-
+    if (newPassword !== repeatNewPassword) {
+      return res.status(409).json({ message: "The passwords have to match" });
+    }
     user.password = await user.encryptPassword(newPassword);
     user.resetToken = undefined;
     user.resetTokenExpiration = undefined;
     await user.save();
     return res.status(200).json({ message: "Password reset successfully" });
   } catch (err) {
-    console.log(err);
     return res.status(500).json({ message: "Error reseting password" });
   }
 };

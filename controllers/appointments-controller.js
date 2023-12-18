@@ -6,6 +6,14 @@ const User = require("../models/User");
 const addAppointment = async (req, res, next) => {
   const { doctorId, date } = req.body;
   try {
+    const allowedStartHour = "08:00";
+    const allowedEndHour = "20:00";
+    if (date < allowedStartHour || date > allowedEndHour) {
+      return res.status(409).json({
+        message:
+          "Couldn't publish the appointment because it is outside the schedule range. It has to be between 08:00 and 20:00",
+      });
+    }
     const existingAppointment = await Appointment.findOne({ date: date });
     if (existingAppointment) {
       return res
@@ -21,25 +29,44 @@ const addAppointment = async (req, res, next) => {
     await Doctor.findByIdAndUpdate(doctorId, {
       $push: { appointments: newAppointment._id },
     });
-    return res.status(201).json({ message: "Appointment created" });
+    return res.status(201).json(newAppointment);
   } catch (err) {
-    console.log(err);
+    return res.status(500).json({ message: "Error server add appointment" });
   }
 };
 
 // http://localhost:5000/api/appointment/update-appointment/:id
 const updateAppointment = async (req, res, next) => {
   const appointmentId = req.params.id;
-  const updateData = req.body;
+  const { date } = req.body;
   try {
+    const allowedStartHour = "08:00";
+    const allowedEndHour = "20:00";
+    if (date < allowedStartHour || date > allowedEndHour) {
+      return res.status(409).json({
+        message:
+          "Couldn't publish the appointment because it is outside the schedule range. It has to be between 08:00 and 20:00",
+      });
+    }
     const existingAppointment = await Appointment.findById(appointmentId);
     if (!existingAppointment) {
       return res.status(404).json({ message: "Appointment no exists" });
     }
-    await Appointment.findByIdAndUpdate(appointmentId, updateData);
-    return res.status(201).json({ message: "Appointment actualized" });
+    if (
+      existingAppointment.status === "reserved" ||
+      existingAppointment.status === "cancelled"
+    ) {
+      return res
+        .status(409)
+        .json({ message: "Couldn't update because don't is available" });
+    }
+    const appointmentUpdated = await Appointment.findByIdAndUpdate(
+      appointmentId,
+      { date },
+      { new: true }
+    );
+    return res.status(201).json(appointmentUpdated);
   } catch (err) {
-    console.log(err);
     return res.status(500).json({ message: "Error at update the appointment" });
   }
 };
@@ -54,27 +81,43 @@ const deleteAppointment = async (req, res, next) => {
         .status(404)
         .json({ message: "Appointment not found for delete it" });
     }
+    if (
+      existingAppointment.status === "cancelled" ||
+      existingAppointment.status === "reserved"
+    ) {
+      return res
+        .status(409)
+        .json({ message: "Couldn't delete because don't is available" });
+    }
     const doctorId = existingAppointment.doctorId;
-    await Appointment.findByIdAndDelete(appointmentId);
+    const deletedAppointment = await Appointment.findByIdAndDelete(
+      appointmentId
+    );
     await Doctor.findByIdAndUpdate(doctorId, {
       $pull: { appointments: appointmentId },
     });
-    return res.status(201).json({ message: "Appointment deleted" });
+    return res.status(201).json(deletedAppointment);
   } catch (err) {
-    console.log(err);
+    return res.status(500).json({ message: "Error server delete appointment" });
   }
 };
 
 // http://localhost:5000/api/appointment/get-appointments-by-doctor/:id
 const getAppointmentsByDoctor = async (req, res, next) => {
   const doctorId = req.params.id;
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 10;
   try {
     const appointmentByDoctor = await Doctor.findById(doctorId).populate({
       path: "appointments",
       populate: [
         { path: "doctorId", select: "name lastName specialty" },
-        { path: "patient", select: "name lastName email" },
+        { path: "patient", select: "name lastName" },
       ],
+      options: {
+        skip: (page - 1) * limit,
+        limit: limit,
+      },
     });
     if (!appointmentByDoctor) {
       return res
@@ -88,7 +131,9 @@ const getAppointmentsByDoctor = async (req, res, next) => {
     }
     return res.status(200).json(appointmentByDoctor.appointments);
   } catch (err) {
-    console.log(err);
+    return res
+      .status(500)
+      .json({ message: "Error server get appointments by doctor" });
   }
 };
 
@@ -111,7 +156,11 @@ const getAppointmentsByPatient = async (req, res, next) => {
           select: "specialty",
         },
       });
-
+    if (!appointmentByPatient) {
+      return res
+        .status(404)
+        .json({ message: "Appointments by patient not found" });
+    }
     if (appointmentByPatient.length === 0) {
       return res
         .status(404)
@@ -120,6 +169,9 @@ const getAppointmentsByPatient = async (req, res, next) => {
     return res.status(200).json(appointmentByPatient);
   } catch (err) {
     console.log(err);
+    return res
+      .status(500)
+      .json({ message: "Error server error get appointments by patient" });
   }
 };
 
@@ -127,6 +179,23 @@ const getAppointmentsByPatient = async (req, res, next) => {
 const reserveAppointment = async (req, res, next) => {
   const { userId, appointmentId } = req.body;
   try {
+    const appointmentFound = await Appointment.findById(appointmentId);
+    const userFound = await User.findById(userId);
+    if (!appointmentFound) {
+      return res
+        .status(404)
+        .json({ message: "Appointment not found for reserve it" });
+    }
+    if (!userFound) {
+      return res
+        .status(404)
+        .json({ message: "User not found for do the reserve" });
+    }
+    if (appointmentFound.status === "reserved") {
+      return res.status(409).json({
+        message: "Appointment already reserved, please choose another",
+      });
+    }
     const updatedAppointment = {
       status: "reserved",
       patient: userId,
@@ -138,7 +207,6 @@ const reserveAppointment = async (req, res, next) => {
     );
     return res.status(200).json(appointmentReserved);
   } catch (err) {
-    console.log(err);
     return res.status(500).json({ message: "Error reserving appointment" });
   }
 };
@@ -148,6 +216,12 @@ const cancelAppointment = async (req, res, next) => {
   const { userId, appointmentId } = req.body;
   try {
     const appointmentFound = await Appointment.findById(appointmentId);
+    const userFound = await User.findById(userId);
+    if (!userFound) {
+      return res
+        .status(404)
+        .json({ message: "User not found for cancel appointment" });
+    }
     if (!appointmentFound) {
       return res
         .status(404)
@@ -157,6 +231,11 @@ const cancelAppointment = async (req, res, next) => {
       return res
         .status(409)
         .json({ message: "Cannot cancel a appointment when available" });
+    }
+    if (appointmentFound.status === "cancelled") {
+      return res
+        .status(409)
+        .json({ message: "This appointment already cancelled" });
     }
     const doctorId = appointmentFound.doctorId;
     const updatedAppointment = {
@@ -173,7 +252,7 @@ const cancelAppointment = async (req, res, next) => {
     });
     return res.status(200).json(canceledAppointment);
   } catch (err) {
-    console.log(err);
+    return res.status(500).json({ message: "Error server cancel appointment" });
   }
 };
 
@@ -200,7 +279,9 @@ const allCancelationsByPatient = async (req, res, next) => {
       });
     return res.status(200).json(cancelations);
   } catch (err) {
-    console.log(err);
+    return res
+      .status(500)
+      .json({ message: "Error server get all cancelations by patient" });
   }
 };
 
