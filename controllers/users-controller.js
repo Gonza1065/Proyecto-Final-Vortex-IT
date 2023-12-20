@@ -6,6 +6,20 @@ const config = require("../config/config");
 
 const generateToken = require("../token/generateToken");
 
+const getUsersPatient = async (req, res, next) => {
+  try {
+    const existingUsersPatients = await User.find({ role: "patient" });
+    if (existingUsersPatients.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "There aren't patients registered in the data base" });
+    }
+    return res.status(200).json(existingUsersPatients);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 // http://localhost:5000/api/users/signup
 const signup = async (req, res, next) => {
   const { name, lastName, email, password, role } = req.body;
@@ -112,6 +126,7 @@ const resetPassword = async (req, res, next) => {
   }
 };
 
+exports.getUsersPatient = getUsersPatient;
 exports.signup = signup;
 exports.login = login;
 exports.forgotPassword = forgotPassword;
