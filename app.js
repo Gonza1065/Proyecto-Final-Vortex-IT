@@ -1,11 +1,18 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 require("./db/db");
 
 const usersRoutes = require("./routes/users-routes");
 const doctorsRoutes = require("./routes/doctors-routes");
 const specialtiesRoutes = require("./routes/specialties-routes");
 const appointmentRoutes = require("./routes/appointments-routes");
+
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+  })
+);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

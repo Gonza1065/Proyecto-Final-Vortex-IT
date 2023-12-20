@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const specialtySchema = new mongoose.Schema({
   specialty: {
     type: String,
+    unique: true, // Asegura que los nombres de especialidad sean únicos
     required: true,
   },
 });

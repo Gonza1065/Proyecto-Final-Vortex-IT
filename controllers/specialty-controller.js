@@ -19,23 +19,4 @@ const getSpecialty = async (req, res, next) => {
   }
 };
 
-// http://localhost:5000/api/add-specialty
-const addSpecialty = async (req, res, next) => {
-  const { specialty } = req.body;
-  try {
-    const existingSpecialty = await Specialty.findOne({ specialty: specialty });
-    if (existingSpecialty) {
-      return res.status(409).json({ message: "Specialty already exists" });
-    }
-    const newSpecialty = new Specialty({
-      specialty,
-    });
-    await newSpecialty.save();
-    return res.status(201).json(newSpecialty);
-  } catch (err) {
-    return res.status(500).json({ message: "Error server add specialty" });
-  }
-};
-
 exports.getSpecialty = getSpecialty;
-exports.addSpecialty = addSpecialty;

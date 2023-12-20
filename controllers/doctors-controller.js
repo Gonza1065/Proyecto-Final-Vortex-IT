@@ -17,10 +17,8 @@ const getDoctors = async (req, res, next) => {
         .status(409)
         .json({ message: "There aren't doctors in the system" });
     }
-
     return res.status(200).json(existingDoctors);
   } catch (err) {
-    console.log(err);
     return res.status(500).json({ message: "Error server get doctors" });
   }
 };
@@ -34,6 +32,10 @@ const getDoctorSeeDetails = async (req, res, next) => {
       populate: {
         path: "doctorId",
         select: "name lastName specialty",
+        populate: {
+          path: "specialty",
+          select: "specialty",
+        },
       },
     });
     if (!existingDoctor) {
@@ -66,14 +68,14 @@ const getDoctorSeeDetails = async (req, res, next) => {
 const addDoctor = async (req, res, next) => {
   const { name, lastName, specialty, appointments } = req.body;
   try {
-    const existingSpecialty = await Specialty.findById(specialty);
+    let existingSpecialty = await Specialty.findOne({ specialty });
     if (!existingSpecialty) {
-      return res.status(404).json({ message: "Specialty not found" });
+      existingSpecialty = await Specialty.create({ specialty });
     }
     const newDoctor = new Doctor({
       name,
       lastName,
-      specialty,
+      specialty: existingSpecialty._id,
     });
     await newDoctor.save();
     const doctorId = newDoctor._id;
@@ -90,6 +92,7 @@ const addDoctor = async (req, res, next) => {
     }
     return res.status(201).json({ message: "Doctor created" });
   } catch (err) {
+    console.log(err);
     return res
       .status(500)
       .json({ message: "Error server add doctor at system" });
@@ -99,7 +102,7 @@ const addDoctor = async (req, res, next) => {
 // http://localhost:5000/api/doctors/update-doctor/:id
 const updateDoctor = async (req, res, next) => {
   const doctorId = req.params.id;
-  const updateData = req.body;
+  const { name, lastName } = req.body;
   try {
     const existingDoctor = await Doctor.findById(doctorId);
     if (!existingDoctor) {
@@ -107,9 +110,13 @@ const updateDoctor = async (req, res, next) => {
         .status(404)
         .json({ message: "Doctor not found for update it" });
     }
-    const updatedDoctor = await Doctor.findByIdAndUpdate(doctorId, updateData, {
-      new: true,
-    });
+    const updatedDoctor = await Doctor.findByIdAndUpdate(
+      doctorId,
+      { name, lastName },
+      {
+        new: true,
+      }
+    );
     return res.status(201).json(updatedDoctor);
   } catch (err) {
     return res.status(500).json({ message: "Error server update the doctor" });

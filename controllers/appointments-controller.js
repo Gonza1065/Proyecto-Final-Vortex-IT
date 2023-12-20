@@ -168,7 +168,6 @@ const getAppointmentsByPatient = async (req, res, next) => {
     }
     return res.status(200).json(appointmentByPatient);
   } catch (err) {
-    console.log(err);
     return res
       .status(500)
       .json({ message: "Error server error get appointments by patient" });
