@@ -30,7 +30,7 @@ const getDoctorSeeDetails = async (req, res, next) => {
     const existingDoctor = await Doctor.findById(doctorId).populate({
       path: "appointments",
       populate: {
-        path: "doctorId",
+        path: "doctor",
         select: "name lastName specialty",
         populate: {
           path: "specialty",

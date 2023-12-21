@@ -10,6 +10,30 @@
 			"name": "Register Users",
 			"item": [
 				{
+					"name": "GET Patients",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNGY5NjUxMTM2MjUwYTU3NDAyZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMzEwMjAzMiwiZXhwIjoxNzAzMTg4NDMyfQ.XlhlXDmKNH8sv1sh1iBClZ-aYJKKPquz3MOK-HiDI0Y",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/users/patients",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"patients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Login Admin",
 					"request": {
 						"method": "POST",
@@ -241,13 +265,13 @@
 						"header": [
 							{
 								"key": "x-access-token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNGY5NjUxMTM2MjUwYTU3NDAyZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMjkwNTQyNywiZXhwIjoxNzAyOTkxODI3fQ.PAxPq5RhATPrgmUqjIbfhHQcpkdZhh_e42aaicLfb-8",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNGY5NjUxMTM2MjUwYTU3NDAyZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMzA4NDA5NSwiZXhwIjoxNzAzMTcwNDk1fQ.DN9ItvjNk5Rc6MRlYXrBw4qSNxacgnaDbNKWANj5kYg",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Micaela\",\r\n    \"lastName\": \"Herrero\",\r\n    \"specialty\": \"65804f00617e5e5892320f93\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Fernanda\",\r\n    \"lastName\": \"Gonzalez\",\r\n    \"specialty\": \"Nutrición\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -313,13 +337,13 @@
 						"header": [
 							{
 								"key": "x-access-token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNGY5NjUxMTM2MjUwYTU3NDAyZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMjkwNjk0NCwiZXhwIjoxNzAyOTkzMzQ0fQ.K-dfrprAWzz8HBV7P7wSznQpZO0cjzT2ABn15BCLtho",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNGY5NjUxMTM2MjUwYTU3NDAyZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMzEwMjAzMiwiZXhwIjoxNzAzMTg4NDMyfQ.XlhlXDmKNH8sv1sh1iBClZ-aYJKKPquz3MOK-HiDI0Y",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"doctorId\": \"65804687b002b410ea5ffebb\",\r\n    \"date\": \"15:00\"\r\n}",
+							"raw": "{\r\n    \"doctorId\": \"65804687b002b410ea5ffebb\",\r\n    \"date\": \"14:00\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

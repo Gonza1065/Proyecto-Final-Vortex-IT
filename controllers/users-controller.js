@@ -85,7 +85,7 @@ const forgotPassword = async (req, res, next) => {
         pass: "xzqx zsin ftoo lpbe",
       },
     });
-    const resetLink = `http://system-doctors.com/reset-password/${resetToken}`;
+    const resetLink = `http://localhost:5173/reset-password/${resetToken}`;
     const mailOptions = {
       from: "saguasg@gmail.com",
       to: email,

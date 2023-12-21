@@ -4,7 +4,7 @@ const User = require("../models/User");
 
 // http://localhost:5000/api/appointment/add-appointment
 const addAppointment = async (req, res, next) => {
-  const { doctorId, date } = req.body;
+  const { doctor, date } = req.body;
   try {
     const allowedStartHour = "08:00";
     const allowedEndHour = "20:00";
@@ -21,12 +21,12 @@ const addAppointment = async (req, res, next) => {
         .json({ message: "Appointment already registered" });
     }
     const newAppointment = new Appointment({
-      doctorId,
+      doctor,
       date,
       status: "available",
     });
     await newAppointment.save();
-    await Doctor.findByIdAndUpdate(doctorId, {
+    await Doctor.findByIdAndUpdate(doctor, {
       $push: { appointments: newAppointment._id },
     });
     return res.status(201).json(newAppointment);
@@ -111,7 +111,11 @@ const getAppointmentsByDoctor = async (req, res, next) => {
     const appointmentByDoctor = await Doctor.findById(doctorId).populate({
       path: "appointments",
       populate: [
-        { path: "doctorId", select: "name lastName specialty" },
+        {
+          path: "doctor",
+          select: "name lastName specialty",
+          populate: { path: "specialty", select: "specialty" },
+        },
         { path: "patient", select: "name lastName" },
       ],
       options: {
@@ -149,7 +153,7 @@ const getAppointmentsByPatient = async (req, res, next) => {
         select: "name lastName",
       })
       .populate({
-        path: "doctorId",
+        path: "doctor",
         select: "name lastName specialty",
         populate: {
           path: "specialty",
@@ -236,7 +240,7 @@ const cancelAppointment = async (req, res, next) => {
         .status(409)
         .json({ message: "This appointment already cancelled" });
     }
-    const doctorId = appointmentFound.doctorId;
+    const doctorId = appointmentFound.doctor;
     const updatedAppointment = {
       status: "cancelled",
       patient: userId,
@@ -269,7 +273,7 @@ const allCancelationsByPatient = async (req, res, next) => {
       $and: [{ patient: userId }, { status: "cancelled" }],
     })
       .populate({
-        path: "doctorId",
+        path: "doctor",
         select: "name lastName specialty",
       })
       .populate({
