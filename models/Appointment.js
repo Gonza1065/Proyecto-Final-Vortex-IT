@@ -14,6 +14,14 @@ const appointmentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  day: {
+    type: String,
+    required: true,
+  },
+  month: {
+    type: String,
+    required: true,
+  },
   status: {
     type: String,
     enum: ["reserved", "cancelled", "available"],

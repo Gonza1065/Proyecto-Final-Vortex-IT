@@ -72,10 +72,22 @@ const addDoctor = async (req, res, next) => {
     if (!existingSpecialty) {
       existingSpecialty = await Specialty.create({ specialty });
     }
+    if (!existingSpecialty) {
+      return res.status(404).json({ message: "Specialty not found" });
+    }
+    const idSpecialty = existingSpecialty._id;
+    const specialtyDoctorFound = await Doctor.findOne({
+      specialty: idSpecialty,
+    });
+    if (specialtyDoctorFound) {
+      return res
+        .status(409)
+        .json({ message: "Already exists a doctor with that specialty" });
+    }
     const newDoctor = new Doctor({
       name,
       lastName,
-      specialty: existingSpecialty._id,
+      specialty: idSpecialty,
     });
     await newDoctor.save();
     const doctorId = newDoctor._id;

@@ -31,7 +31,7 @@ router.get(
 );
 router.get(
   "/get-appointments-by-patients/:id",
-  verifyTokenAdmin,
+  // [verifyTokenPatient, verifyTokenAdmin],
   appointmentsController.getAppointmentsByPatient
 );
 router.post(

@@ -1,18 +1,44 @@
 const Appointment = require("../models/Appointment");
 const Doctor = require("../models/Doctor");
 const User = require("../models/User");
+const Specialty = require("../models/Specialty");
 
 // http://localhost:5000/api/appointment/add-appointment
 const addAppointment = async (req, res, next) => {
-  const { doctor, date } = req.body;
+  const { doctorSpecialty, date, day, month } = req.body;
   try {
     const allowedStartHour = "08:00";
     const allowedEndHour = "20:00";
+    const allowedDay = "31";
+    const allowedMonth = "12";
     if (date < allowedStartHour || date > allowedEndHour) {
       return res.status(409).json({
         message:
           "Couldn't publish the appointment because it is outside the schedule range. It has to be between 08:00 and 20:00",
       });
+    }
+    if (day > allowedDay || day < "1") {
+      return res.status(409).json({ message: "You have that put a day valid" });
+    }
+    if (month > allowedMonth && month < "1") {
+      return res
+        .status(409)
+        .json({ message: "You have that put a month valid" });
+    }
+    const doctorSpecialtyFound = await Specialty.findOne({
+      specialty: doctorSpecialty,
+    });
+    if (!doctorSpecialtyFound) {
+      return res.status(404).json({ message: "Specialty not found" });
+    }
+    const idSpecialty = doctorSpecialtyFound._id;
+    const doctor = await Doctor.findOne({
+      specialty: idSpecialty,
+    });
+    if (!doctor) {
+      return res
+        .status(404)
+        .json({ message: "Doctor not found with the specified specialty" });
     }
     const existingAppointment = await Appointment.findOne({ date: date });
     if (existingAppointment) {
@@ -21,16 +47,19 @@ const addAppointment = async (req, res, next) => {
         .json({ message: "Appointment already registered" });
     }
     const newAppointment = new Appointment({
-      doctor,
+      doctor: doctor._id,
       date,
+      day,
+      month,
       status: "available",
     });
     await newAppointment.save();
-    await Doctor.findByIdAndUpdate(doctor, {
+    await Doctor.findByIdAndUpdate(doctor._id, {
       $push: { appointments: newAppointment._id },
     });
     return res.status(201).json(newAppointment);
   } catch (err) {
+    console.log(err);
     return res.status(500).json({ message: "Error server add appointment" });
   }
 };
@@ -51,6 +80,12 @@ const updateAppointment = async (req, res, next) => {
     const existingAppointment = await Appointment.findById(appointmentId);
     if (!existingAppointment) {
       return res.status(404).json({ message: "Appointment no exists" });
+    }
+    const existingDate = await Appointment.findOne({ date: date });
+    if (existingDate) {
+      return res
+        .status(409)
+        .json({ message: "Couldn't update because already exists that date" });
     }
     if (
       existingAppointment.status === "reserved" ||
@@ -230,16 +265,18 @@ const cancelAppointment = async (req, res, next) => {
         .status(404)
         .json({ message: "Appointment not found for cancel it" });
     }
+    // console.log(appointmentFound)
     if (appointmentFound.status === "available") {
       return res
         .status(409)
         .json({ message: "Cannot cancel a appointment when available" });
     }
-    if (appointmentFound.status === "cancelled") {
-      return res
-        .status(409)
-        .json({ message: "This appointment already cancelled" });
-    }
+    // if (appointmentFound.status === "cancelled") {
+    //   return res
+    //     .status(409)
+    //     .json({ message: "This appointment already cancelled" });
+    // }
+    console.log(appointmentFound);
     const doctorId = appointmentFound.doctor;
     const updatedAppointment = {
       status: "cancelled",
