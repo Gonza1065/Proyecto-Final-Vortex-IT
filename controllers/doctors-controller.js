@@ -72,9 +72,6 @@ const addDoctor = async (req, res, next) => {
     if (!existingSpecialty) {
       existingSpecialty = await Specialty.create({ specialty });
     }
-    if (!existingSpecialty) {
-      return res.status(404).json({ message: "Specialty not found" });
-    }
     const idSpecialty = existingSpecialty._id;
     const specialtyDoctorFound = await Doctor.findOne({
       specialty: idSpecialty,
@@ -114,7 +111,7 @@ const addDoctor = async (req, res, next) => {
 // http://localhost:5000/api/doctors/update-doctor/:id
 const updateDoctor = async (req, res, next) => {
   const doctorId = req.params.id;
-  const { name, lastName } = req.body;
+  const { name, lastName, specialty } = req.body;
   try {
     const existingDoctor = await Doctor.findById(doctorId);
     if (!existingDoctor) {
@@ -122,15 +119,26 @@ const updateDoctor = async (req, res, next) => {
         .status(404)
         .json({ message: "Doctor not found for update it" });
     }
+    const existingSpecialty = existingDoctor.specialty;
+    if (existingSpecialty.toString() !== specialty.toString()) {
+      let foundSpecialty = await Specialty.findOne({ specialty });
+      if (!foundSpecialty) {
+        foundSpecialty = await Specialty.create({ specialty });
+      }
+      await Doctor.findByIdAndUpdate(doctorId, {
+        specialty: foundSpecialty._id,
+      });
+    }
     const updatedDoctor = await Doctor.findByIdAndUpdate(
       doctorId,
-      { name, lastName },
+      { name, lastName, specialty },
       {
         new: true,
       }
     );
     return res.status(201).json(updatedDoctor);
   } catch (err) {
+    console.log(err);
     return res.status(500).json({ message: "Error server update the doctor" });
   }
 };

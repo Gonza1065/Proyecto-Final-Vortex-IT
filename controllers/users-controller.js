@@ -6,9 +6,14 @@ const config = require("../config/config");
 
 const generateToken = require("../token/generateToken");
 
+// http://localhost:5000/api/users/patients
 const getUsersPatient = async (req, res, next) => {
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 10;
   try {
-    const existingUsersPatients = await User.find({ role: "patient" });
+    const existingUsersPatients = await User.find({ role: "patient" })
+      .skip((page - 1) * limit)
+      .limit(limit);
     if (existingUsersPatients.length === 0) {
       return res
         .status(404)

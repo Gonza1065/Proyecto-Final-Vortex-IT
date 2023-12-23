@@ -67,22 +67,34 @@ const addAppointment = async (req, res, next) => {
 // http://localhost:5000/api/appointment/update-appointment/:id
 const updateAppointment = async (req, res, next) => {
   const appointmentId = req.params.id;
-  const { date } = req.body;
+  const { date, day, month } = req.body;
   try {
     const allowedStartHour = "08:00";
     const allowedEndHour = "20:00";
+    const allowedDay = "31";
+    const allowedMonth = "12";
     if (date < allowedStartHour || date > allowedEndHour) {
       return res.status(409).json({
         message:
           "Couldn't publish the appointment because it is outside the schedule range. It has to be between 08:00 and 20:00",
       });
     }
+    if (day > allowedDay || day < "1") {
+      return res.status(409).json({ message: "You have that put a day valid" });
+    }
+    if (month > allowedMonth && month < "1") {
+      return res
+        .status(409)
+        .json({ message: "You have that put a month valid" });
+    }
     const existingAppointment = await Appointment.findById(appointmentId);
     if (!existingAppointment) {
       return res.status(404).json({ message: "Appointment no exists" });
     }
-    const existingDate = await Appointment.findOne({ date: date });
-    if (existingDate) {
+    const existingDate = await Appointment.find({
+      $and: [{ date: date }, { day: day }, { month: month }],
+    });
+    if (existingDate.length > 0) {
       return res
         .status(409)
         .json({ message: "Couldn't update because already exists that date" });
@@ -97,7 +109,7 @@ const updateAppointment = async (req, res, next) => {
     }
     const appointmentUpdated = await Appointment.findByIdAndUpdate(
       appointmentId,
-      { date },
+      { date, day, month },
       { new: true }
     );
     return res.status(201).json(appointmentUpdated);
@@ -124,7 +136,7 @@ const deleteAppointment = async (req, res, next) => {
         .status(409)
         .json({ message: "Couldn't delete because don't is available" });
     }
-    const doctorId = existingAppointment.doctorId;
+    const doctorId = existingAppointment.doctor;
     const deletedAppointment = await Appointment.findByIdAndDelete(
       appointmentId
     );
@@ -178,6 +190,8 @@ const getAppointmentsByDoctor = async (req, res, next) => {
 
 // http://localhost:5000/api/appointment/get-appointments-by-patients/:id
 const getAppointmentsByPatient = async (req, res, next) => {
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 10;
   const patientId = req.params.id;
   try {
     const appointmentByPatient = await Appointment.find({
@@ -194,7 +208,9 @@ const getAppointmentsByPatient = async (req, res, next) => {
           path: "specialty",
           select: "specialty",
         },
-      });
+      })
+      .skip((page - 1) * limit)
+      .limit(limit);
     if (!appointmentByPatient) {
       return res
         .status(404)
@@ -265,17 +281,11 @@ const cancelAppointment = async (req, res, next) => {
         .status(404)
         .json({ message: "Appointment not found for cancel it" });
     }
-    // console.log(appointmentFound)
     if (appointmentFound.status === "available") {
       return res
         .status(409)
         .json({ message: "Cannot cancel a appointment when available" });
     }
-    // if (appointmentFound.status === "cancelled") {
-    //   return res
-    //     .status(409)
-    //     .json({ message: "This appointment already cancelled" });
-    // }
     console.log(appointmentFound);
     const doctorId = appointmentFound.doctor;
     const updatedAppointment = {
@@ -312,11 +322,22 @@ const allCancelationsByPatient = async (req, res, next) => {
       .populate({
         path: "doctor",
         select: "name lastName specialty",
+        populate: {
+          path: "specialty",
+          select: "specialty",
+        },
       })
       .populate({
         path: "patient",
         select: "name lastName",
-      });
+      })
+      .skip((page - 1) * limit)
+      .limit(limit);
+    if (cancelations.length === 0) {
+      return res
+        .status(200)
+        .json({ message: "No cancelations found for the user" });
+    }
     return res.status(200).json(cancelations);
   } catch (err) {
     return res

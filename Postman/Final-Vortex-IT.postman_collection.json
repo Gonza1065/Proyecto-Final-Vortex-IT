@@ -1,650 +1,594 @@
 {
-	"info": {
-		"_postman_id": "16c1cc9b-2766-4e6b-a11d-0d8b93571dc9",
-		"name": "Final-Vortex-IT",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "30368572"
-	},
-	"item": [
-		{
-			"name": "Register Users",
-			"item": [
-				{
-					"name": "GET Patients",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "x-access-token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNGY5NjUxMTM2MjUwYTU3NDAyZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMzEwMjAzMiwiZXhwIjoxNzAzMTg4NDMyfQ.XlhlXDmKNH8sv1sh1iBClZ-aYJKKPquz3MOK-HiDI0Y",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{url}}/users/patients",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"users",
-								"patients"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Login Admin",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"saguasg@gmail.com\",\r\n    \"password\": \"gonza2002!\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/users/login",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"users",
-								"login"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Login Patient",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"sebas@gmail.com\",\r\n    \"password\": \"seba2002\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/users/login",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"users",
-								"login"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Signup Patient",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Sebastian\",\r\n    \"lastName\": \"Saguas\",\r\n    \"email\": \"sebas@gmail.com\",\r\n    \"password\": \"seba2002\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/users/signup",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"users",
-								"signup"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Signup Admin",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Gonzalo\",\r\n    \"lastName\": \"Saguas\",\r\n    \"email\": \"saguasg@gmail.com\",\r\n    \"password\": \"gonza2002\",\r\n    \"role\": \"admin\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/users/signup",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"users",
-								"signup"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Reset Password",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"newPassword\": \"gonza2002!\",\r\n    \"repeatNewPassword\": \"gonza2002!\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/users/reset-password/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNGY5NjUxMTM2MjUwYTU3NDAyZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMjkyMDI1MiwiZXhwIjoxNzAzMDA2NjUyfQ.BuNacvfca6kdLpPrzOtrV0VI2nnRqzG8LRskb25Ts6E",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"users",
-								"reset-password",
-								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNGY5NjUxMTM2MjUwYTU3NDAyZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMjkyMDI1MiwiZXhwIjoxNzAzMDA2NjUyfQ.BuNacvfca6kdLpPrzOtrV0VI2nnRqzG8LRskb25Ts6E"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Forgot Password",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"saguasg@gmail.com\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/users/forgot-password",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"users",
-								"forgot-password"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Doctors",
-			"item": [
-				{
-					"name": "GET Doctors",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "x-access-token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNTAwNjUxMTM2MjUwYTU3NDAzMCIsInJvbGUiOiJwYXRpZW50IiwiaWF0IjoxNzAyOTA2OTQzLCJleHAiOjE3MDI5OTMzNDN9.6ZcStCL7Z9y0g-GftWjIS7NSayz2cUoRw69mL-YmlwM",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{url}}/doctors?page=1&limit=3",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"doctors"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": "1"
-								},
-								{
-									"key": "limit",
-									"value": "3"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET See Details By Doctor",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "x-access-token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNTAwNjUxMTM2MjUwYTU3NDAzMCIsInJvbGUiOiJwYXRpZW50IiwiaWF0IjoxNzAyOTA2OTQzLCJleHAiOjE3MDI5OTMzNDN9.6ZcStCL7Z9y0g-GftWjIS7NSayz2cUoRw69mL-YmlwM",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{url}}/doctors/65804687b002b410ea5ffebb",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"doctors",
-								"65804687b002b410ea5ffebb"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "POST Add Doctor",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "x-access-token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNGY5NjUxMTM2MjUwYTU3NDAyZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMzA4NDA5NSwiZXhwIjoxNzAzMTcwNDk1fQ.DN9ItvjNk5Rc6MRlYXrBw4qSNxacgnaDbNKWANj5kYg",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Fernanda\",\r\n    \"lastName\": \"Gonzalez\",\r\n    \"specialty\": \"Nutrición\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/doctors/add-doctor",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"doctors",
-								"add-doctor"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "PATCH Update Doctor",
-					"request": {
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "x-access-token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNGY5NjUxMTM2MjUwYTU3NDAyZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMjkwNjk0NCwiZXhwIjoxNzAyOTkzMzQ0fQ.K-dfrprAWzz8HBV7P7wSznQpZO0cjzT2ABn15BCLtho",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Mercedes\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/doctors/update-doctor/657c49eb3e849322f9e99d7f",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"doctors",
-								"update-doctor",
-								"657c49eb3e849322f9e99d7f"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Appointments",
-			"item": [
-				{
-					"name": "POST Add Appointment",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "x-access-token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNGY5NjUxMTM2MjUwYTU3NDAyZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMzEwMjAzMiwiZXhwIjoxNzAzMTg4NDMyfQ.XlhlXDmKNH8sv1sh1iBClZ-aYJKKPquz3MOK-HiDI0Y",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"doctorId\": \"65804687b002b410ea5ffebb\",\r\n    \"date\": \"14:00\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/appointment/add-appointment",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"appointment",
-								"add-appointment"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "POST Reserve Appointment",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "x-access-token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNTAwNjUxMTM2MjUwYTU3NDAzMCIsInJvbGUiOiJwYXRpZW50IiwiaWF0IjoxNzAyOTA2MzU1LCJleHAiOjE3MDI5OTI3NTV9.VjdAPb5YK1v9CAlJfQU0M5kSWNmAaQt3GEfSJ6MOcy4",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"userId\": \"657b1500651136250a574030\",\r\n    \"appointmentId\": \"658085ad5a5984f4964e07c3\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/appointment/reserve-appointment",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"appointment",
-								"reserve-appointment"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "POST Cancel Appointment",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "x-access-token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNTAwNjUxMTM2MjUwYTU3NDAzMCIsInJvbGUiOiJwYXRpZW50IiwiaWF0IjoxNzAyOTA2OTQzLCJleHAiOjE3MDI5OTMzNDN9.6ZcStCL7Z9y0g-GftWjIS7NSayz2cUoRw69mL-YmlwM",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"userId\": \"657b1500651136250a574030\",\r\n    \"appointmentId\": \"65804d314c2b081efc15b9ec\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/appointment/cancel-appointment",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"appointment",
-								"cancel-appointment"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DELETE Delete Appointment",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "x-access-token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNGY5NjUxMTM2MjUwYTU3NDAyZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMjkwNjk0NCwiZXhwIjoxNzAyOTkzMzQ0fQ.K-dfrprAWzz8HBV7P7wSznQpZO0cjzT2ABn15BCLtho",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{url}}/appointment/delete-appointment/658085ad5a5984f4964e07c3",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"appointment",
-								"delete-appointment",
-								"658085ad5a5984f4964e07c3"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET See Appointments By Doctor",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "x-access-token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNGY5NjUxMTM2MjUwYTU3NDAyZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMjkwNjk0NCwiZXhwIjoxNzAyOTkzMzQ0fQ.K-dfrprAWzz8HBV7P7wSznQpZO0cjzT2ABn15BCLtho",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{url}}/appointment/get-appointments-by-doctor/65804687b002b410ea5ffebb?page=1&limit=1",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"appointment",
-								"get-appointments-by-doctor",
-								"65804687b002b410ea5ffebb"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": "1"
-								},
-								{
-									"key": "limit",
-									"value": "1"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET See Appointments By Patient",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "x-access-token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNGY5NjUxMTM2MjUwYTU3NDAyZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMjkwNjk0NCwiZXhwIjoxNzAyOTkzMzQ0fQ.K-dfrprAWzz8HBV7P7wSznQpZO0cjzT2ABn15BCLtho",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{url}}/appointment/get-appointments-by-patients/657b1500651136250a574030",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"appointment",
-								"get-appointments-by-patients",
-								"657b1500651136250a574030"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET All Cancelations By Patient",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "x-access-token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNGY5NjUxMTM2MjUwYTU3NDAyZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMjkwNjk0NCwiZXhwIjoxNzAyOTkzMzQ0fQ.K-dfrprAWzz8HBV7P7wSznQpZO0cjzT2ABn15BCLtho",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{url}}/appointment/all-cancelations-by-patient/657b1500651136250a574030",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"appointment",
-								"all-cancelations-by-patient",
-								"657b1500651136250a574030"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "PATCH Update Appointment",
-					"request": {
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "x-access-token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNGY5NjUxMTM2MjUwYTU3NDAyZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMjkwNjk0NCwiZXhwIjoxNzAyOTkzMzQ0fQ.K-dfrprAWzz8HBV7P7wSznQpZO0cjzT2ABn15BCLtho",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"date\": \"09:00\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/appointment/update-appointment/658085ad5a5984f4964e07c3",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"appointment",
-								"update-appointment",
-								"658085ad5a5984f4964e07c3"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Specialities",
-			"item": [
-				{
-					"name": "GET Specialities",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "x-access-token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNTAwNjUxMTM2MjUwYTU3NDAzMCIsInJvbGUiOiJwYXRpZW50IiwiaWF0IjoxNzAyOTA2OTQzLCJleHAiOjE3MDI5OTMzNDN9.6ZcStCL7Z9y0g-GftWjIS7NSayz2cUoRw69mL-YmlwM",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{url}}/specialty?page=1&limit=3",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"specialty"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": "1"
-								},
-								{
-									"key": "limit",
-									"value": "3"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "POST Add Specialty",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "x-access-token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNGY5NjUxMTM2MjUwYTU3NDAyZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMjkwNjk0NCwiZXhwIjoxNzAyOTkzMzQ0fQ.K-dfrprAWzz8HBV7P7wSznQpZO0cjzT2ABn15BCLtho",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"specialty\": \"Nutrición\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/specialty/add-specialty",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"specialty",
-								"add-specialty"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		}
-	]
+  "info": {
+    "_postman_id": "16c1cc9b-2766-4e6b-a11d-0d8b93571dc9",
+    "name": "Final-Vortex-IT",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "30368572"
+  },
+  "item": [
+    {
+      "name": "Register Users",
+      "item": [
+        {
+          "name": "GET Patients",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-access-token",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ODcxMDIyYTZlYzIxZjE1YWRlMzQ1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMzM1NDQ4MiwiZXhwIjoxNzAzNDQwODgyfQ.wKxDMuIcKHgAq_03pn2DwAGGnK1cauY_OdTvPO5_gic",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/users/patients?page=1&limit=3",
+              "host": ["{{url}}"],
+              "path": ["users", "patients"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "3"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login Admin",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"saguasg@gmail.com\",\r\n    \"password\": \"gonza2002\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/users/login",
+              "host": ["{{url}}"],
+              "path": ["users", "login"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login Patient",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"merce@gmail.com\",\r\n    \"password\": \"merce2002!!\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/users/login",
+              "host": ["{{url}}"],
+              "path": ["users", "login"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Signup Patient",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Sebastian\",\r\n    \"lastName\": \"Saguas\",\r\n    \"email\": \"sebas@gmail.com\",\r\n    \"password\": \"seba2002\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/users/signup",
+              "host": ["{{url}}"],
+              "path": ["users", "signup"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Signup Admin",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Gonzalo\",\r\n    \"lastName\": \"Saguas\",\r\n    \"email\": \"saguasg@gmail.com\",\r\n    \"password\": \"gonza2002\",\r\n    \"role\": \"admin\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/users/signup",
+              "host": ["{{url}}"],
+              "path": ["users", "signup"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Reset Password",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"newPassword\": \"gonza2002!\",\r\n    \"repeatNewPassword\": \"gonza2002!\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/users/reset-password/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNGY5NjUxMTM2MjUwYTU3NDAyZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMjkyMDI1MiwiZXhwIjoxNzAzMDA2NjUyfQ.BuNacvfca6kdLpPrzOtrV0VI2nnRqzG8LRskb25Ts6E",
+              "host": ["{{url}}"],
+              "path": [
+                "users",
+                "reset-password",
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNGY5NjUxMTM2MjUwYTU3NDAyZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMjkyMDI1MiwiZXhwIjoxNzAzMDA2NjUyfQ.BuNacvfca6kdLpPrzOtrV0VI2nnRqzG8LRskb25Ts6E"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Forgot Password",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"saguasg@gmail.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/users/forgot-password",
+              "host": ["{{url}}"],
+              "path": ["users", "forgot-password"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Doctors",
+      "item": [
+        {
+          "name": "GET Doctors",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-access-token",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNTAwNjUxMTM2MjUwYTU3NDAzMCIsInJvbGUiOiJwYXRpZW50IiwiaWF0IjoxNzAyOTA2OTQzLCJleHAiOjE3MDI5OTMzNDN9.6ZcStCL7Z9y0g-GftWjIS7NSayz2cUoRw69mL-YmlwM",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/doctors?page=1&limit=3",
+              "host": ["{{url}}"],
+              "path": ["doctors"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "3"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET See Details By Doctor",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-access-token",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNTAwNjUxMTM2MjUwYTU3NDAzMCIsInJvbGUiOiJwYXRpZW50IiwiaWF0IjoxNzAyOTA2OTQzLCJleHAiOjE3MDI5OTMzNDN9.6ZcStCL7Z9y0g-GftWjIS7NSayz2cUoRw69mL-YmlwM",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/doctors/65804687b002b410ea5ffebb",
+              "host": ["{{url}}"],
+              "path": ["doctors", "65804687b002b410ea5ffebb"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST Add Doctor",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "x-access-token",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNGY5NjUxMTM2MjUwYTU3NDAyZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMzA4NDA5NSwiZXhwIjoxNzAzMTcwNDk1fQ.DN9ItvjNk5Rc6MRlYXrBw4qSNxacgnaDbNKWANj5kYg",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Fernanda\",\r\n    \"lastName\": \"Gonzalez\",\r\n    \"specialty\": \"Nutrición\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/doctors/add-doctor",
+              "host": ["{{url}}"],
+              "path": ["doctors", "add-doctor"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH Update Doctor",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "x-access-token",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNGY5NjUxMTM2MjUwYTU3NDAyZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMjkwNjk0NCwiZXhwIjoxNzAyOTkzMzQ0fQ.K-dfrprAWzz8HBV7P7wSznQpZO0cjzT2ABn15BCLtho",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Mercedes\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/doctors/update-doctor/657c49eb3e849322f9e99d7f",
+              "host": ["{{url}}"],
+              "path": ["doctors", "update-doctor", "657c49eb3e849322f9e99d7f"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Appointments",
+      "item": [
+        {
+          "name": "POST Add Appointment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "x-access-token",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNGY5NjUxMTM2MjUwYTU3NDAyZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMzEwMjAzMiwiZXhwIjoxNzAzMTg4NDMyfQ.XlhlXDmKNH8sv1sh1iBClZ-aYJKKPquz3MOK-HiDI0Y",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"doctorId\": \"65804687b002b410ea5ffebb\",\r\n    \"date\": \"14:00\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/appointment/add-appointment",
+              "host": ["{{url}}"],
+              "path": ["appointment", "add-appointment"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST Reserve Appointment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "x-access-token",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNTAwNjUxMTM2MjUwYTU3NDAzMCIsInJvbGUiOiJwYXRpZW50IiwiaWF0IjoxNzAyOTA2MzU1LCJleHAiOjE3MDI5OTI3NTV9.VjdAPb5YK1v9CAlJfQU0M5kSWNmAaQt3GEfSJ6MOcy4",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"userId\": \"657b1500651136250a574030\",\r\n    \"appointmentId\": \"658085ad5a5984f4964e07c3\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/appointment/reserve-appointment",
+              "host": ["{{url}}"],
+              "path": ["appointment", "reserve-appointment"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST Cancel Appointment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "x-access-token",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNTAwNjUxMTM2MjUwYTU3NDAzMCIsInJvbGUiOiJwYXRpZW50IiwiaWF0IjoxNzAyOTA2OTQzLCJleHAiOjE3MDI5OTMzNDN9.6ZcStCL7Z9y0g-GftWjIS7NSayz2cUoRw69mL-YmlwM",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"userId\": \"657b1500651136250a574030\",\r\n    \"appointmentId\": \"65804d314c2b081efc15b9ec\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/appointment/cancel-appointment",
+              "host": ["{{url}}"],
+              "path": ["appointment", "cancel-appointment"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE Delete Appointment",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "x-access-token",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNGY5NjUxMTM2MjUwYTU3NDAyZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMjkwNjk0NCwiZXhwIjoxNzAyOTkzMzQ0fQ.K-dfrprAWzz8HBV7P7wSznQpZO0cjzT2ABn15BCLtho",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/appointment/delete-appointment/658085ad5a5984f4964e07c3",
+              "host": ["{{url}}"],
+              "path": [
+                "appointment",
+                "delete-appointment",
+                "658085ad5a5984f4964e07c3"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET See Appointments By Doctor",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-access-token",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNGY5NjUxMTM2MjUwYTU3NDAyZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMjkwNjk0NCwiZXhwIjoxNzAyOTkzMzQ0fQ.K-dfrprAWzz8HBV7P7wSznQpZO0cjzT2ABn15BCLtho",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/appointment/get-appointments-by-doctor/65804687b002b410ea5ffebb?page=1&limit=1",
+              "host": ["{{url}}"],
+              "path": [
+                "appointment",
+                "get-appointments-by-doctor",
+                "65804687b002b410ea5ffebb"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET See Appointments By Patient",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-access-token",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ODcxMDIyYTZlYzIxZjE1YWRlMzQ1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMzM1NDc4MSwiZXhwIjoxNzAzNDQxMTgxfQ.EAHCi829WFslsdgKJ6c-cGMBrlKri07JpogMVDDAyOo",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/appointment/get-appointments-by-patients/657b1500651136250a574030?page=1&limit=3",
+              "host": ["{{url}}"],
+              "path": [
+                "appointment",
+                "get-appointments-by-patients",
+                "657b1500651136250a574030"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "3"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET All Cancelations By Patient",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-access-token",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNGY5NjUxMTM2MjUwYTU3NDAyZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMjkwNjk0NCwiZXhwIjoxNzAyOTkzMzQ0fQ.K-dfrprAWzz8HBV7P7wSznQpZO0cjzT2ABn15BCLtho",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/appointment/all-cancelations-by-patient/657b1500651136250a574030?page=1&limit=3",
+              "host": ["{{url}}"],
+              "path": [
+                "appointment",
+                "all-cancelations-by-patient",
+                "657b1500651136250a574030"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "3"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH Update Appointment",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "x-access-token",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNGY5NjUxMTM2MjUwYTU3NDAyZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMjkwNjk0NCwiZXhwIjoxNzAyOTkzMzQ0fQ.K-dfrprAWzz8HBV7P7wSznQpZO0cjzT2ABn15BCLtho",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"date\": \"09:00\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/appointment/update-appointment/658085ad5a5984f4964e07c3",
+              "host": ["{{url}}"],
+              "path": [
+                "appointment",
+                "update-appointment",
+                "658085ad5a5984f4964e07c3"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Specialities",
+      "item": [
+        {
+          "name": "GET Specialities",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-access-token",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ODcxNjY1MTc4OWQ1ZmI1NTA3Yjg3MCIsInJvbGUiOiJwYXRpZW50IiwiaWF0IjoxNzAzMzU0OTY3LCJleHAiOjE3MDM0NDEzNjd9.qIu35Qwe7STALWLl6JWDELjokQhoQQYBOQMWupLvJs4",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/specialty?page=1&limit=3",
+              "host": ["{{url}}"],
+              "path": ["specialty"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "3"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST Add Specialty",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "x-access-token",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IxNGY5NjUxMTM2MjUwYTU3NDAyZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwMjkwNjk0NCwiZXhwIjoxNzAyOTkzMzQ0fQ.K-dfrprAWzz8HBV7P7wSznQpZO0cjzT2ABn15BCLtho",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"specialty\": \"Nutrición\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/specialty/add-specialty",
+              "host": ["{{url}}"],
+              "path": ["specialty", "add-specialty"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
 }
