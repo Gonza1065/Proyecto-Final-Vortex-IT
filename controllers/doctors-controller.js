@@ -29,14 +29,7 @@ const getDoctorSeeDetails = async (req, res, next) => {
   try {
     const existingDoctor = await Doctor.findById(doctorId).populate({
       path: "appointments",
-      populate: {
-        path: "doctor",
-        select: "name lastName specialty",
-        populate: {
-          path: "specialty",
-          select: "specialty",
-        },
-      },
+      select: "date day month status",
     });
     if (!existingDoctor) {
       return res
@@ -56,7 +49,7 @@ const getDoctorSeeDetails = async (req, res, next) => {
         message: "There aren't appointments available, full reserved",
       });
     }
-    return res.status(200).json(appointmentsAvailable);
+    return res.status(200).json(existingDoctor);
   } catch (err) {
     return res
       .status(500)
