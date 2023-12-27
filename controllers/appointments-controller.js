@@ -40,11 +40,14 @@ const addAppointment = async (req, res, next) => {
         .status(404)
         .json({ message: "Doctor not found with the specified specialty" });
     }
-    const existingAppointment = await Appointment.findOne({ date: date });
+    const existingAppointment = await Appointment.findOne({
+      doctor: doctor._id,
+      date: date,
+    });
     if (existingAppointment) {
       return res
         .status(409)
-        .json({ message: "Appointment already registered" });
+        .json({ message: "Appointment already registered with this doctor" });
     }
     const newAppointment = new Appointment({
       doctor: doctor._id,
@@ -286,7 +289,6 @@ const cancelAppointment = async (req, res, next) => {
         .status(409)
         .json({ message: "Cannot cancel a appointment when available" });
     }
-    console.log(appointmentFound);
     const doctorId = appointmentFound.doctor;
     const updatedAppointment = {
       status: "cancelled",
@@ -309,6 +311,8 @@ const cancelAppointment = async (req, res, next) => {
 // http://localhost:5000/api/appointment/all-cancelations-by-patient/:id
 const allCancelationsByPatient = async (req, res, next) => {
   const userId = req.params.id;
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.page) || 10;
   try {
     const existingUser = await User.findById(userId);
     if (!existingUser) {
@@ -340,6 +344,7 @@ const allCancelationsByPatient = async (req, res, next) => {
     }
     return res.status(200).json(cancelations);
   } catch (err) {
+    console.log(err);
     return res
       .status(500)
       .json({ message: "Error server get all cancelations by patient" });

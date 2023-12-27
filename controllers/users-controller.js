@@ -6,7 +6,7 @@ const config = require("../config/config");
 
 const generateToken = require("../token/generateToken");
 
-// http://localhost:5000/api/users/patients
+// http://localhost:5000/api/users/patients?page=1&limit=5
 const getUsersPatient = async (req, res, next) => {
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 10;

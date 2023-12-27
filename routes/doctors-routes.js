@@ -9,16 +9,8 @@ const authenticateToken = require("../middleware/authenticateToken");
 
 router.use(authenticateToken);
 
-router.get(
-  "/",
-  // [verifyTokenPatient, verifyTokenAdmin],
-  doctorsController.getDoctors
-);
-router.get(
-  "/:id",
-  // [verifyTokenPatient, verifyTokenAdmin],
-  doctorsController.getDoctorSeeDetails
-);
+router.get("/", doctorsController.getDoctors);
+router.get("/:id", doctorsController.getDoctorSeeDetails);
 router.post("/add-doctor", verifyTokenAdmin, doctorsController.addDoctor);
 router.patch(
   "/update-doctor/:id",

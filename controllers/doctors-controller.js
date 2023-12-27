@@ -2,7 +2,7 @@ const Doctor = require("../models/Doctor");
 const Appointment = require("../models/Appointment");
 const Specialty = require("../models/Specialty");
 
-// http://localhost:5000/api/doctors/
+// http://localhost:5000/api/doctors
 const getDoctors = async (req, res, next) => {
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 10;
@@ -119,22 +119,18 @@ const updateDoctor = async (req, res, next) => {
         .status(404)
         .json({ message: "Doctor not found for update it" });
     }
-    const existingSpecialty = existingDoctor.specialty;
-    if (existingSpecialty.toString() !== specialty.toString()) {
-      let foundSpecialty = await Specialty.findOne({ specialty });
-      if (!foundSpecialty) {
-        foundSpecialty = await Specialty.create({ specialty });
-      }
-      await Doctor.findByIdAndUpdate(doctorId, {
-        specialty: foundSpecialty._id,
-      });
+    let existingSpecialty = await Specialty.findOne({ specialty: specialty });
+    if (!existingSpecialty) {
+      existingSpecialty = await Specialty.create({ specialty: specialty });
     }
     const updatedDoctor = await Doctor.findByIdAndUpdate(
       doctorId,
-      { name, lastName, specialty },
       {
-        new: true,
-      }
+        name,
+        lastName,
+        specialty: existingSpecialty._id,
+      },
+      { new: true }
     );
     return res.status(201).json(updatedDoctor);
   } catch (err) {
