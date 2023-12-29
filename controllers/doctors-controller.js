@@ -13,9 +13,7 @@ const getDoctors = async (req, res, next) => {
       .skip((page - 1) * limit)
       .limit(limit);
     if (existingDoctors.length === 0) {
-      return res
-        .status(409)
-        .json({ message: "There aren't doctors in the system" });
+      return res.status(404).json({ message: "Doctors not found" });
     }
     return res.status(200).json(existingDoctors);
   } catch (err) {

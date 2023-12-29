@@ -181,7 +181,7 @@ const getAppointmentsByDoctor = async (req, res, next) => {
     if (appointmentByDoctor.appointments.length === 0) {
       return res
         .status(404)
-        .json({ message: "There aren't appointments with this doctor" });
+        .json({ message: "Appointments not found with this doctor" });
     }
     return res.status(200).json(appointmentByDoctor.appointments);
   } catch (err) {
@@ -222,7 +222,7 @@ const getAppointmentsByPatient = async (req, res, next) => {
     if (appointmentByPatient.length === 0) {
       return res
         .status(404)
-        .json({ message: "There aren't appointments with that patient" });
+        .json({ message: "Appointments not found with this patient" });
     }
     return res.status(200).json(appointmentByPatient);
   } catch (err) {

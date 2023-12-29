@@ -9,9 +9,7 @@ const getSpecialty = async (req, res, next) => {
       .skip((page - 1) * limit)
       .limit(limit);
     if (!existingSpecialty) {
-      return res
-        .status(404)
-        .json({ message: "There aren't specialities published" });
+      return res.status(404).json({ message: "Specialties not found" });
     }
     return res.status(200).json(existingSpecialty);
   } catch (err) {
