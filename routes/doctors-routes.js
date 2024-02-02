@@ -4,7 +4,6 @@ const router = express.Router();
 const doctorsController = require("../controllers/doctors-controller");
 
 const verifyTokenAdmin = require("../middleware/verifyTokenAdmin");
-const verifyTokenPatient = require("../middleware/verifyTokenPatient");
 const authenticateToken = require("../middleware/authenticateToken");
 
 router.use(authenticateToken);

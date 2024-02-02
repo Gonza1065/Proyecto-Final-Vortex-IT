@@ -25,19 +25,22 @@ const getDoctors = async (req, res, next) => {
 const getDoctorSeeDetails = async (req, res, next) => {
   const doctorId = req.params.id;
   try {
-    const existingDoctor = await Doctor.findById(doctorId).populate({
-      path: "appointments",
-      select: "date day month status",
-    });
+    const existingDoctor = await Doctor.findById(doctorId)
+      .populate({
+        path: "appointments",
+        select: "date day month status",
+      })
+      .populate({
+        path: "specialty",
+        select: "specialty",
+      });
     if (!existingDoctor) {
       return res
         .status(404)
         .json({ message: "Doctor not found for see details" });
     }
     if (existingDoctor.appointments.length === 0) {
-      return res
-        .status(404)
-        .json({ message: "There aren't appointments published" });
+      return res.json(existingDoctor);
     }
     const appointmentsAvailable = existingDoctor.appointments.filter(
       (appointment) => appointment.status === "available"
@@ -67,11 +70,11 @@ const addDoctor = async (req, res, next) => {
     const specialtyDoctorFound = await Doctor.findOne({
       specialty: idSpecialty,
     });
-    if (specialtyDoctorFound) {
-      return res
-        .status(409)
-        .json({ message: "Already exists a doctor with that specialty" });
-    }
+    // if (specialtyDoctorFound) {
+    //   return res
+    //     .status(409)
+    //     .json({ message: "Already exists a doctor with that specialty" });
+    // }
     const newDoctor = new Doctor({
       name,
       lastName,
@@ -109,10 +112,6 @@ const updateDoctor = async (req, res, next) => {
       return res
         .status(404)
         .json({ message: "Doctor not found for update it" });
-    }
-    let existingSpecialty = await Specialty.findOne({ specialty: specialty });
-    if (!existingSpecialty) {
-      existingSpecialty = await Specialty.create({ specialty: specialty });
     }
     const updatedDoctor = await Doctor.findByIdAndUpdate(
       doctorId,
