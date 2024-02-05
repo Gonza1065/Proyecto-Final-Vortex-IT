@@ -26,7 +26,6 @@ router.delete(
 );
 router.get(
   "/get-appointments-by-doctor/:id",
-  verifyTokenAdmin,
   appointmentsController.getAppointmentsByDoctor
 );
 router.get(

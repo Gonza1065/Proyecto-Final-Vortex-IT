@@ -39,17 +39,18 @@ const getDoctorSeeDetails = async (req, res, next) => {
         .status(404)
         .json({ message: "Doctor not found for see details" });
     }
-    if (existingDoctor.appointments.length === 0) {
-      return res.json(existingDoctor);
-    }
+    // if (existingDoctor.appointments.length === 0) {
+    //   return res.json(existingDoctor);
+    // }
     const appointmentsAvailable = existingDoctor.appointments.filter(
       (appointment) => appointment.status === "available"
     );
-    if (appointmentsAvailable.length === 0) {
-      return res.status(404).json({
-        message: "There aren't appointments available, full reserved",
-      });
-    }
+    // if (appointmentsAvailable.length === 0) {
+    //   return res.json({
+    //     message: "There aren't appointments available, full reserved",
+    //     existingDoctor,
+    //   });
+    // }
     return res.status(200).json(existingDoctor);
   } catch (err) {
     return res
@@ -118,7 +119,7 @@ const updateDoctor = async (req, res, next) => {
       {
         name,
         lastName,
-        specialty: existingSpecialty._id,
+        specialty: specialty._id,
       },
       { new: true }
     );
