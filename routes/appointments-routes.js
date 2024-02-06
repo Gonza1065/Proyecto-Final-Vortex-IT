@@ -9,6 +9,8 @@ const verifyTokenPatient = require("../middleware/verifyTokenPatient");
 
 router.use(authenticateToken);
 
+router.get("/", verifyTokenAdmin, appointmentsController.getAppointments);
+router.get("/:id", verifyTokenAdmin, appointmentsController.getAppointmentById);
 router.post(
   "/add-appointment",
   verifyTokenAdmin,

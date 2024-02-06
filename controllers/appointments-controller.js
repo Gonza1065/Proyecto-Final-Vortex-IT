@@ -3,6 +3,35 @@ const Doctor = require("../models/Doctor");
 const User = require("../models/User");
 const Specialty = require("../models/Specialty");
 
+// http://localhost:5000/api/appointment
+const getAppointments = async (req, res, next) => {
+  try {
+    const existingAppointments = await Appointment.find();
+    if (!existingAppointments) {
+      return res
+        .status(404)
+        .json({ message: "There aren't appointments published" });
+    }
+    return res.status(200).json(existingAppointments);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// http://localhost:5000/api/appointment/:id
+const getAppointmentById = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const existingAppointment = await Appointment.findById(id);
+    if (!existingAppointment) {
+      return res.status(404).json({ message: "Appointment not found" });
+    }
+    return res.status(200).json(existingAppointment);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 // http://localhost:5000/api/appointment/add-appointment
 const addAppointment = async (req, res, next) => {
   const { doctorSpecialty, date, day, month } = req.body;
@@ -197,6 +226,10 @@ const getAppointmentsByPatient = async (req, res, next) => {
   const limit = parseInt(req.query.limit) || 10;
   const patientId = req.params.id;
   try {
+    const existingPatient = await User.findOne({
+      _id: patientId,
+      role: "patient",
+    });
     const appointmentByPatient = await Appointment.find({
       patient: patientId,
     })
@@ -220,9 +253,10 @@ const getAppointmentsByPatient = async (req, res, next) => {
         .json({ message: "Appointments by patient not found" });
     }
     if (appointmentByPatient.length === 0) {
-      return res
-        .status(404)
-        .json({ message: "Appointments not found with this patient" });
+      return res.status(404).json({
+        message: "Appointments not found with this patient",
+        existingPatient,
+      });
     }
     return res.status(200).json(appointmentByPatient);
   } catch (err) {
@@ -351,6 +385,8 @@ const allCancelationsByPatient = async (req, res, next) => {
   }
 };
 
+exports.getAppointments = getAppointments;
+exports.getAppointmentById = getAppointmentById;
 exports.addAppointment = addAppointment;
 exports.updateAppointment = updateAppointment;
 exports.deleteAppointment = deleteAppointment;
